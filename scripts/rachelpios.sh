@@ -1,0 +1,100 @@
+sudo apt-get update
+sudo rpi-update
+sudo apt-get dist-upgrade
+
+
+#Install apps
+sudo apt-get install  samba \
+                      samba-common-bin \
+                      nginx \
+                      libxml2-dev \
+                      mysql-server \
+                      mysql-client \
+                      php5 \
+                      php5-common \
+                      php5-cgi \
+                      php5-mysql \
+                      php5-fpm \
+                      php5-gd \
+                      ffmpeg \
+                      zip \
+                      imagemagick \
+                      hostapd \
+                      udhcpd
+
+
+#Update hostname
+sudo cp /etc/hosts /etc/hosts.bak
+sudo cp ./hostfiles/hosts /etc/hosts
+sudo cp /etc/hostname /etc/hostname.bak
+sudo cp ./hostfiles/hostname /etc/hostname
+sudo /etc/init.d/hostname.sh
+
+
+#Samba config
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+sudo cp ./samba/smb.conf /etc/samba/smb.conf
+sudo cp /etc/samba/dhcp.conf /etc/samba/dhcp.conf.bak
+#sudo cp ./samba/dhcp.conf /etc/samba/dhcp.conf #This file no longer exists in the repo?
+sudo /etc/samba/gdbcommands /etc/samba/gdbcommands.bak #Doesn't exist by default, but try to copy it anyways.
+sudo cp ./samba/gdbcommands /etc/samba/gdbcommands
+
+
+#Nginx config
+sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
+sudo cp ./nginx/sites-enabled/default /etc/nginx/sites-enabled/default
+
+
+#Install base www files
+sudo cp -r ./www/* /usr/share/nginx/www/
+
+
+#Downlaod all the content
+sudo chmod +x ./scripts/encontent.sh
+./scripts/encontent.sh
+
+
+#Configure _h5ai
+mkdir /usr/share/nginx/www/_h5ai
+sudo chmod 777 -R /usr/share/nginx/www/_h5ai/cache/
+
+
+#create wifi hotspot
+sudo cp udhcpd.conf /etc/udhcpd.conf
+sudo cp udhcpd /etc/default/udhcpd
+sudo cp hostapd /etc/default/hostapd
+sudo cp interfaces /etc/network/interfaces
+sudo cp hostapd.conf /etc/hostapd/hostapd.conf
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+sudo cp sysctl.conf /etc/sysctl.conf
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+sudo ifconfig wlan0 10.10.10.10
+sudo service hostapd start
+sudo service udhcpd start
+sudo update-rc.d hostapd enable
+sudo update-rc.d udhcpd enable
+
+
+
+##redo wifi enable for good measure
+#sudo ifconfig wlan0 10.10.10.10
+#sudo service hostapd start
+#sudo service udhcpd start
+#sudo update-rc.d hostapd enable
+#sudo update-rc.d udhcpd enable
+
+
+#webshutdown
+sudo chmod 775 ./scripts/ifupdown.sh
+./scripts/ifupdown.sh
+
+
+# Don't think this is needed...might be overwriting the latest drivers...
+##put realtek drivers in place if needed
+#sudo mv hostapd_RTL8188CUS /home/pi/hostapd_RTL
+#sudo cp realtek.sh /home/pi/Desktop/realtek.sh
+#sudo mv hostapd_realtek.conf /home/pi/hostapd_realtek.conf
+#sudo chmod +x /home/pi/Desktop/realtek.sh
