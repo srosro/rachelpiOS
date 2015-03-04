@@ -49,12 +49,16 @@ sudo cp ./nginx/sites-enabled/default /etc/nginx/sites-enabled/default
 sudo cp -r ./www/* /usr/share/nginx/www/
 
 #Configure _h5ai
-mkdir /usr/share/nginx/www/_h5ai
+sudo mkdir /usr/share/nginx/www/_h5ai
 sudo chmod 777 -R /usr/share/nginx/www/_h5ai/cache/
 
 #Load the nginx config files
 #(after this you should be able to visit the web server and see content)
 sudo nginx -s reload
+
+#Sphider
+sudo chmod 777 -R /usr/share/nginx/www/rsphider/admin/tmp
+echo "CREATE DATABASE sphider_plus;" |  mysql -u root -prachellovespie
 
 #Downlaod all the content
 sudo chmod +x ./scripts/encontent.sh

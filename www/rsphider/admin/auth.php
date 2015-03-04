@@ -1,7 +1,7 @@
 <?php
 
-    $admin = 'admin';
-    $admin_pw = 'admin';
+    $admin = 'root';
+    $admin_pw = 'rachellovespie';
 
     $include_dir    = "../include";
     $settings_dir   = "../settings";

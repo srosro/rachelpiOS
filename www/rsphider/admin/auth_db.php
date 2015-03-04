@@ -1,7 +1,7 @@
 <?php
 
-    $db_admin = 'admin';
-    $db_admin_pw = 'admin';
+    $db_admin = 'root';
+    $db_admin_pw = 'rachellovespie';
 
     session_start();
 

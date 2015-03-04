@@ -1,7 +1,7 @@
 <?php
     //error_reporting(E_ERROR | E_PARSE);
-    $admin = 'admin';
-    $admin_pw = 'admin';
+    $admin = 'root';
+    $admin_pw = 'rachellovespie';
 
     define("_SECURE",1) ;    // define secure constant
     session_start();
