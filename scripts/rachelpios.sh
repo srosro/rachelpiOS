@@ -15,6 +15,7 @@ sudo apt-get install  samba \
                       php5-cgi \
                       php5-mysql \
                       php5-fpm \
+                      php5-mcrypt \
                       php5-gd \
                       ffmpeg \
                       zip \
