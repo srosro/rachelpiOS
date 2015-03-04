@@ -59,14 +59,24 @@ mkdir /usr/share/nginx/www/_h5ai
 sudo chmod 777 -R /usr/share/nginx/www/_h5ai/cache/
 
 
-#create wifi hotspot
-sudo cp udhcpd.conf /etc/udhcpd.conf
-sudo cp udhcpd /etc/default/udhcpd
-sudo cp hostapd /etc/default/hostapd
-sudo cp interfaces /etc/network/interfaces
-sudo cp hostapd.conf /etc/hostapd/hostapd.conf
+#Create wifi hotspot
+sudo cp /etc/udhcpd.conf /etc/udhcpd.conf.bak
+sudo cp ./hotspot/udhcpd.conf /etc/udhcpd.conf
+
+sudo cp /etc/default/udhcpd /etc/default/udhcpd.bak
+sudo cp ./hotspot/udhcpd /etc/default/udhcpd
+
+sudo cp /etc/default/hostapd /etc/default/hostapd.bak
+sudo cp ./hotspot/hostapd /etc/default/hostapd
+
+sudo cp /etc/network/interfaces /etc/network/interfaces.bak
+sudo cp ./hotspot/interfaces /etc/network/interfaces
+
+sudo cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.bak
+sudo cp ./hotspot/hostapd.conf /etc/hostapd/hostapd.conf
+
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-sudo cp sysctl.conf /etc/sysctl.conf
+sudo cp ./hotspot/sysctl.conf /etc/sysctl.conf
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
@@ -94,7 +104,7 @@ sudo chmod 775 ./scripts/ifupdown.sh
 
 # Don't think this is needed...might be overwriting the latest drivers...
 ##put realtek drivers in place if needed
-#sudo mv hostapd_RTL8188CUS /home/pi/hostapd_RTL
-#sudo cp realtek.sh /home/pi/Desktop/realtek.sh
-#sudo mv hostapd_realtek.conf /home/pi/hostapd_realtek.conf
+#sudo cp ./drivers/hostapd_RTL8188CUS /home/pi/hostapd_RTL
+#sudo cp ./drivers/realtek.sh /home/pi/Desktop/realtek.sh
+#sudo cp ./drivers/hostapd_realtek.conf /home/pi/hostapd_realtek.conf
 #sudo chmod +x /home/pi/Desktop/realtek.sh
