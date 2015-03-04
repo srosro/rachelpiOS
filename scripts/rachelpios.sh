@@ -57,7 +57,7 @@ sudo chmod 777 -R /usr/share/nginx/www/_h5ai/cache/
 sudo nginx -s reload
 
 #Sphider
-sudo chmod 777 -R /usr/share/nginx/www/rsphider/admin/tmp
+sudo chmod 777 -R /usr/share/nginx/www/rsphider
 echo "CREATE DATABASE sphider_plus;" |  mysql -u root -prachellovespie
 
 #Downlaod all the content
