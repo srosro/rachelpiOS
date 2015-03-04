@@ -87,8 +87,6 @@ sudo service udhcpd start
 sudo update-rc.d hostapd enable
 sudo update-rc.d udhcpd enable
 
-
-
 ##redo wifi enable for good measure
 #sudo ifconfig wlan0 10.10.10.10
 #sudo service hostapd start
