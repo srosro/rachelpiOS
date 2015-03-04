@@ -28,3 +28,9 @@ $ ./scripts/rachelpios.sh # Execute script (note, this will disconnect you from 
 ```
 
 Go through prompts (entering Y to the quesitons).  Set mysql password: "rachellovespie"
+
+Test it out! From another machine, connect to "RPI" wireless network, and visit http://10.10.10.10/
+
+Install sphider tables by visiting http://10.10.10.10/rsphider/admin/install_tables.php
+* User: root
+* Password: rachellovespie
