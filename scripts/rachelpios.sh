@@ -44,20 +44,20 @@ sudo cp ./samba/gdbcommands /etc/samba/gdbcommands
 sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
 sudo cp ./nginx/sites-enabled/default /etc/nginx/sites-enabled/default
 
-
 #Install base www files
 sudo cp -r ./www/* /usr/share/nginx/www/
-
-
-#Downlaod all the content
-sudo chmod +x ./scripts/encontent.sh
-./scripts/encontent.sh
-
 
 #Configure _h5ai
 mkdir /usr/share/nginx/www/_h5ai
 sudo chmod 777 -R /usr/share/nginx/www/_h5ai/cache/
 
+#Load the nginx config files
+#(after this you should be able to visit the web server and see content)
+sudo nginx -s reload
+
+#Downlaod all the content
+sudo chmod +x ./scripts/encontent.sh
+./scripts/encontent.sh
 
 #Create wifi hotspot
 sudo cp /etc/udhcpd.conf /etc/udhcpd.conf.bak
@@ -96,7 +96,7 @@ sudo update-rc.d udhcpd enable
 
 
 #webshutdown
-sudo chmod 775 ./scripts/ifupdown.sh
+sudo chmod +x ./scripts/ifupdown.sh
 ./scripts/ifupdown.sh
 
 
