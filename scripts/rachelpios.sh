@@ -4,24 +4,24 @@ sudo apt-get dist-upgrade
 
 
 #Install apps
-sudo apt-get install  samba \
-                      samba-common-bin \
-                      nginx \
-                      libxml2-dev \
-                      mysql-server \
-                      mysql-client \
-                      php5 \
-                      php5-common \
-                      php5-cgi \
-                      php5-mysql \
-                      php5-fpm \
-                      php5-mcrypt \
-                      php5-gd \
-                      ffmpeg \
-                      zip \
-                      imagemagick \
-                      hostapd \
-                      udhcpd
+sudo apt-get install  samba=2:3.6.6-6+deb7u5 \
+                      samba-common-bin=2:3.6.6-6+deb7u5 \
+                      nginx=1.2.1-2.2+wheezy3 \
+                      libxml2-dev=2.8.0+dfsg1-7+wheezy3  \
+                      mysql-server=5.5.41-0+wheezy1 \
+                      mysql-client=5.5.41-0+wheezy1 \
+                      php5=5.4.36-0+deb7u3 \
+                      php5-common=5.4.36-0+deb7u3 \
+                      php5-cgi=5.4.36-0+deb7u3 \
+                      php5-mysql=5.4.36-0+deb7u3 \
+                      php5-fpm=5.4.36-0+deb7u3 \
+                      php5-mcrypt=5.4.36-0+deb7u3 \
+                      php5-gd=5.4.36-0+deb7u3 \
+                      ffmpeg=6:0.8.16-1+rpi1 \
+                      zip=3.0-6 \
+                      imagemagick=8:6.7.7.10-5+deb7u3 \
+                      hostapd=1:1.0-3+deb7u1 \
+                      udhcpd=1:1.20.0-7
 
 
 #Update hostname
@@ -59,6 +59,8 @@ sudo nginx -s reload
 #Sphider
 sudo chmod 777 -R /usr/share/nginx/www/rsphider
 echo "CREATE DATABASE sphider_plus;" |  mysql -u root -prachellovespie
+sudo chmod 777 /usr/share/nginx/www/rsphider/admin/log
+
 
 #Downlaod all the content
 sudo chmod +x ./scripts/encontent.sh
