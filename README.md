@@ -32,5 +32,15 @@ Go through prompts (entering Y to the quesitons).  Set mysql password: "rachello
 Test it out! From another machine, connect to "RPI" wireless network, and visit http://10.10.10.10/
 
 Install sphider tables by visiting http://10.10.10.10/rsphider/admin/install_tables.php
+
 * User: root
 * Password: rachellovespie
+
+Now index sphider: http://192.168.0.54/rsphider/admin/admin.php?f=index
+
+* User: root
+* Password: rachellovespie
+* Address: http://127.0.0.1/
+* Spidering options: Full index depth
+* Re-index: Check to re-index
+
