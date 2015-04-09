@@ -73,11 +73,14 @@ sudo chmod +x ./scripts/encontent.sh
 ./scripts/encontent.sh
 
 #Create wifi hotspot
-sudo cp /etc/udhcpd.conf /etc/udhcpd.conf.bak
+sudo cp /etc/udhcpd.conf /etc/udhcpd.conf.bak #dhcp server
 sudo cp ./hotspot/udhcpd.conf /etc/udhcpd.conf
 
 sudo cp /etc/default/udhcpd /etc/default/udhcpd.bak
 sudo cp ./hotspot/udhcpd /etc/default/udhcpd
+
+sudo cp /etc/default/ifplugd /etc/default/ifplugd.bak #disable ifplugd
+sudo cp ./hotspot/ifplugd /etc/default/ifplugd
 
 sudo cp /etc/default/hostapd /etc/default/hostapd.bak
 sudo cp ./hotspot/hostapd /etc/default/hostapd
@@ -109,11 +112,3 @@ sudo update-rc.d udhcpd enable
 #webshutdown
 sudo chmod +x ./scripts/ifupdown.sh
 ./scripts/ifupdown.sh
-
-
-# Don't think this is needed...might be overwriting the latest drivers...
-##put realtek drivers in place if needed
-#sudo cp ./drivers/hostapd_RTL8188CUS /home/pi/hostapd_RTL
-#sudo cp ./drivers/realtek.sh /home/pi/Desktop/realtek.sh
-#sudo cp ./drivers/hostapd_realtek.conf /home/pi/hostapd_realtek.conf
-#sudo chmod +x /home/pi/Desktop/realtek.sh
