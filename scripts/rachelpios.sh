@@ -45,6 +45,12 @@ sudo cp ./samba/gdbcommands /etc/samba/gdbcommands
 sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
 sudo cp ./nginx/sites-enabled/default /etc/nginx/sites-enabled/default
 
+sudo cp /etc/php5/fpm/php-fpm.conf /etc/php5/fpm/php-fpm.conf.bak
+sudo cp ./php5/fpm/php-fpm.conf /etc/php5/fpm/php-fpm.conf
+
+sudo cp /etc/php5/fpm/php.ini /etc/php5/fpm/php.ini.bak
+sudo cp ./php5/fpm/php.ini /etc/php5/fpm/php.ini
+
 #Install base www files
 sudo cp -r ./www/* /usr/share/nginx/www/
 
@@ -79,27 +85,25 @@ sudo cp ./hotspot/hostapd /etc/default/hostapd
 sudo cp /etc/network/interfaces /etc/network/interfaces.bak
 sudo cp ./hotspot/interfaces /etc/network/interfaces
 
-sudo cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.bak
+sudo cp /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.bak #Does not exist, but attempt to copy anyways...
 sudo cp ./hotspot/hostapd.conf /etc/hostapd/hostapd.conf
 
-sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+sudo cp /etc/sysctl.conf /etc/sysctl.conf.bak
 sudo cp ./hotspot/sysctl.conf /etc/sysctl.conf
+
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
 sudo ifconfig wlan0 10.10.10.10
 sudo service hostapd start
 sudo service udhcpd start
+
 sudo update-rc.d hostapd enable
 sudo update-rc.d udhcpd enable
-
-##redo wifi enable for good measure
-#sudo ifconfig wlan0 10.10.10.10
-#sudo service hostapd start
-#sudo service udhcpd start
-#sudo update-rc.d hostapd enable
-#sudo update-rc.d udhcpd enable
 
 
 #webshutdown
